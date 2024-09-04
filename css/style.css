@@ -696,7 +696,7 @@ a{
 .events .container .info .time .unit{
     border: 1px solid #c3c3c3;
     border-radius: 6px;
-    width: 85px;
+    width: 80px;
     text-align: center;
     transition: 0.3s;
 }
