@@ -618,6 +618,41 @@ a{
 .services .box .info a{
     color: var(--main-color);
 }
+
+/* Hide popups initially */
+.popup {
+    display: none; /* Ensure popups are hidden by default */
+    position: absolute; /* Position it relative to the box */
+    z-index: 9999; /* High value to keep it above other elements */
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Nice soft shadow */
+    max-width: 300px; /* Restrict width */
+}
+
+/* Ensure the popup closes properly */
+.popup .close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Allow the popup to overflow outside the box */
+.box {
+    position: relative; /* Ensure popup is relative to this box */
+    overflow: visible; /* Allow popups to overflow */
+}
+
+/* Active class to show the popup */
+.popup.active {
+    display: block; /* This will show the popup */
+}
+
 /* End services */
 
 /* Start our-skills */
@@ -712,11 +747,6 @@ a{
     color: var(--main-color);
     font-weight: bold;
 }
-.events .container .info .time .unit span:last-child{
-    padding: 8px 10px;
-    font-size: 13px;
-    border-top: 1px solid #d4d4d4;
-}
 .events .container .info h2{
     margin-top: 30px;
     font-size: 30px;
@@ -770,7 +800,7 @@ a{
     border: 2px solid var(--main-color);
     color: var(--main-color);
 }
-/* End events */
+ /* End events */
 
 /* Start pricing */
 .pricing{
@@ -1071,7 +1101,7 @@ a{
     }
 }
 @keyframes fade {
-    form{
+    from{
         opacity: 0;
         transform: translateY(-30px);
     }

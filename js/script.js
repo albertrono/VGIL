@@ -1,4 +1,3 @@
-
 // Landing SliderShow:
 const list = document.querySelector('.slider .list');
 const item = document.querySelectorAll('.slider .list .item');
@@ -60,7 +59,7 @@ function topScroll(){
 // ------------------------------------------------------------
 // Event Countdown:
 
-const eventTime = new Date("Jan 1, 2025 15:30:00").getTime();
+const eventTime = new Date("May 1, 2025 15:30:00").getTime();
 
 const interval = setInterval(() => {
     const now = new Date().getTime();
@@ -106,3 +105,60 @@ faqs.forEach(faq => {
         faq.classList.toggle("active");
     })
 })
+
+// ------------------------------------------------------------
+// Details
+document.addEventListener("DOMContentLoaded", () => {
+    const detailLinks = document.querySelectorAll(".info a");
+  
+detailLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        if (link.target === "_blank") return; // Allow default action for links with target="_blank"
+        e.preventDefault();
+        const popup = link.nextElementSibling;
+
+        
+        // Hide any open popups first
+        document.querySelectorAll(".popup").forEach((p) => p.style.display = "none");
+        
+        // Toggle visibility
+        popup.style.display = "block";
+      });
+    });
+
+    // Close button functionality
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("close")) {
+        e.target.parentElement.style.display = "none";
+      }
+    });
+});
+// Function to toggle popup visibility
+function togglePopup(event, popupId) {
+    event.preventDefault();
+    
+    // Close all open popups first
+    document.querySelectorAll('.popup').forEach(popup => {
+        popup.style.display = 'none'; // Close all popups
+    });
+
+    // Open the targeted popup
+    const popup = document.getElementById(popupId);
+    popup.style.display = 'block'; // Show the targeted popup
+}
+
+// Function to close popup
+function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    popup.style.display = 'none'; // Hide the popup
+}
+
+// Close popup if clicked outside
+document.addEventListener('click', function(event) {
+    const isPopup = event.target.closest('.popup');
+    const isDetailsLink = event.target.closest('.info a');
+    
+    if (!isPopup && !isDetailsLink) {
+        document.querySelectorAll('.popup').forEach(popup => popup.style.display = 'none');
+    }
+});
