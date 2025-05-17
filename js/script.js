@@ -59,7 +59,7 @@ function topScroll(){
 // ------------------------------------------------------------
 // Event Countdown:
 
-const eventTime = new Date("May 1, 2025 15:30:00").getTime();
+const eventTime = new Date("1 Dec, 2025 15:30:00").getTime();
 
 const interval = setInterval(() => {
     const now = new Date().getTime();
@@ -107,58 +107,33 @@ faqs.forEach(faq => {
 })
 
 // ------------------------------------------------------------
-// Details
 document.addEventListener("DOMContentLoaded", () => {
-    const detailLinks = document.querySelectorAll(".info a");
-  
-detailLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        if (link.target === "_blank") return; // Allow default action for links with target="_blank"
-        e.preventDefault();
-        const popup = link.nextElementSibling;
+    // Remove old side panel code since we replaced with flip cards
+    // Add flip card functionality
 
-        
-        // Hide any open popups first
-        document.querySelectorAll(".popup").forEach((p) => p.style.display = "none");
-        
-        // Toggle visibility
-        popup.style.display = "block";
-      });
+    const detailLinks = document.querySelectorAll(".details-link");
+    detailLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Stop event bubbling to prevent hover or other effects
+            console.log("Details button clicked, flipping card");
+            const box = link.closest(".box");
+            if (box) {
+                box.classList.add("flip");
+            }
+        });
     });
 
-    // Close button functionality
-    document.addEventListener("click", (e) => {
-      if (e.target.classList.contains("close")) {
-        e.target.parentElement.style.display = "none";
-      }
+    const closeButtons = document.querySelectorAll(".back .close");
+    closeButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+            const box = button.closest(".box");
+            if (box) {
+                box.classList.remove("flip");
+            }
+        });
     });
 });
-// Function to toggle popup visibility
-function togglePopup(event, popupId) {
-    event.preventDefault();
-    
-    // Close all open popups first
-    document.querySelectorAll('.popup').forEach(popup => {
-        popup.style.display = 'none'; // Close all popups
-    });
+/* Removed old popup functions and event listener for popup close outside */
 
-    // Open the targeted popup
-    const popup = document.getElementById(popupId);
-    popup.style.display = 'block'; // Show the targeted popup
-}
-
-// Function to close popup
-function closePopup(popupId) {
-    const popup = document.getElementById(popupId);
-    popup.style.display = 'none'; // Hide the popup
-}
-
-// Close popup if clicked outside
-document.addEventListener('click', function(event) {
-    const isPopup = event.target.closest('.popup');
-    const isDetailsLink = event.target.closest('.info a');
-    
-    if (!isPopup && !isDetailsLink) {
-        document.querySelectorAll('.popup').forEach(popup => popup.style.display = 'none');
-    }
-});
